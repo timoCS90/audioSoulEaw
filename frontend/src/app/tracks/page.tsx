@@ -1,27 +1,53 @@
 "use client";
 // app/tracks/page.tsx
-import React from "react";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
+import { useDropzone } from "react-dropzone";
+import Track from "../components/Track";
+import * as Tone from "tone";
 
-export default function Tracks() {
+const Tracks: React.FC = () => {
+  const [tracks, setTracks] = useState<File[]>([]);
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    setTracks((prevTracks) => [...prevTracks, ...acceptedFiles]); // Add multiple tracks
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const handlePlayAll = async () => {
+    await Tone.start(); // Ensure the AudioContext is started
+    Tone.Transport.start();
+  };
+
+  const handlePauseAll = () => {
+    Tone.Transport.pause();
+  };
+
   return (
     <Container>
-      <h1>Manage Your Tracks</h1>
-      <TracksContainer>
-        {/* Placeholder for DAW Components */}
-        <Track>
-          <h3>Track 1</h3>
-          <Waveform />
-          {/* Add audio controls and effects here */}
-        </Track>
-        <Track>
-          <h3>Track 2</h3>
-          <Waveform />
-        </Track>
-      </TracksContainer>
+      <h1>Track Management</h1>
+
+      {/* Drag and Drop Area */}
+      <Dropzone {...getRootProps()}>
+        <input {...getInputProps()} />
+        {isDragActive ? (
+          <p>Drop the files here...</p>
+        ) : (
+          <p>Drag & drop audio files here, or click to select them</p>
+        )}
+      </Dropzone>
+
+      <button onClick={handlePlayAll}>Play All</button>
+      <button onClick={handlePauseAll}>Pause All</button>
+
+      {/* Render Multiple Tracks */}
+      {tracks.map((audioFile, index) => (
+        <Track key={index} audioFile={audioFile} trackIndex={index} />
+      ))}
     </Container>
   );
-}
+};
 
 // Styled Components
 const Container = styled.div`
@@ -29,22 +55,15 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const TracksContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+const Dropzone = styled.div`
+  border: 2px dashed #ccc;
+  padding: 20px;
+  margin: 20px;
+  background-color: #fafafa;
+  cursor: pointer;
+  &:hover {
+    background-color: #eee;
+  }
 `;
 
-const Track = styled.div`
-  background-color: #f1f1f1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-`;
-
-const Waveform = styled.div`
-  background-color: #ccc;
-  height: 100px;
-  border-radius: 4px;
-  margin: 10px 0;
-`;
+export default Tracks;
