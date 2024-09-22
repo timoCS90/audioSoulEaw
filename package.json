@@ -2,7 +2,7 @@
   "name": "audiosouleaw",
   "version": "1.0.0",
   "description": "Graduation-project for CLA Bootcamp",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
