@@ -3,7 +3,7 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import { useDropzone } from "react-dropzone";
-import Track from "../components/Track";
+import Track from "../../components/Track";
 import * as Tone from "tone";
 
 const Tracks: React.FC = () => {

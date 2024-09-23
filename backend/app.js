@@ -7,6 +7,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const connectDB = require("./config/db");
+const authRoutes = require("./routes/authRoutes");
+const profileRoutes = require("./routes/profileRoutes");
 
 // Connect to MongoDB
 connectDB();
@@ -15,8 +17,8 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors());
 app.use(express.json()); // To parse JSON payloads
+app.use(cors());
 
 // Define a simple route for testing
 app.get("/", (req, res) => {

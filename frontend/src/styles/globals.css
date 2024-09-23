@@ -1,0 +1,54 @@
+/* Ensure the app takes 100% of the viewport and disables scrolling */
+html,
+body,
+#__next {
+  height: 100%; /* Take full height of the viewport */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure the layout takes full height */
+}
+
+.main-content {
+  display: flex;
+  flex: 1; /* Fill the remaining space */
+  overflow: hidden; /* Prevent scrolling within the main content */
+}
+
+.resizable-windows {
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+  padding: 1rem;
+  overflow: hidden; /* Prevent resizable windows from scrolling */
+}
+
+.box {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  text-align: center;
+  background-color: #f0f0f0;
+  overflow: hidden; /* Prevent content overflow */
+}
+
+.navbar,
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.footer {
+  flex-shrink: 0;
+}

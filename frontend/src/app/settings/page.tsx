@@ -1,7 +1,7 @@
 "use client";
 // src/app/settings.tsx
 import React from "react";
-import Layout from "../components/Layout";
+import Layout from "../../components/Layout";
 
 const Settings: React.FC = () => {
   return (
