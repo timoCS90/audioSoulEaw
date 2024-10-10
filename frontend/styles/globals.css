@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #FFB5B6;
+  --primaryac: #FF05A8;
+  --secondary: #B5E3FF;
+  --highlight: #FFFEB5;
+  --fourth: #B5BCFF;
+
+  --text: #4B6C80;
+
+  --fifth: #B5FFC9;
+
+  --sixth: #EF4119;
+  --white: #F2F4FF;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #FF989D;
+    --secondary: #FFFEB5;
+    --third: #B5E3FF;
+    --fourth: #4B6B80;
+  }
+}
